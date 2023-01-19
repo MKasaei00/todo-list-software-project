@@ -19,11 +19,19 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
 
+{
     using var scope = app.Services.CreateScope();
     var service = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
     service.Database.Migrate();
 }
+
+app.UseCors(builder => builder
+    .AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+);
 
 app.UseHttpsRedirection();
 
