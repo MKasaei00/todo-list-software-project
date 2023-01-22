@@ -1,9 +1,11 @@
 // IMPORT CORE PACKAGES
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // IMPORT USER DRFINED COMPONENTS
+import SnackbarAlert from './components/Snackbar';
 import {Login} from './components/Account/Login.jsx';
+import {Signup} from './components/Account/Signup';
 
 import { 
   ThemeProvider, 
@@ -36,17 +38,29 @@ const theme = createTheme({
 
 
 const App = () => {
+
+  const [snackbarInfo, setSnackbarInfo] = useState({
+    open: false,
+    message: '',
+    severity: 'info',
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <RTL>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
-            {/* <Route path="Design" element={<Design />} /> */}
+            <Route path="/Login" element={<Login setSnackbarInfo={setSnackbarInfo}/>} />
+            <Route path="/Signup" element={<Signup setSnackbarInfo={setSnackbarInfo}/>} />
           </Routes>
           
         </BrowserRouter>
-        
+        <SnackbarAlert
+          open={snackbarInfo.open}
+          setOpen={e => setSnackbarInfo({ message: '', severity: '', open: e })}
+          message={snackbarInfo.message}
+          severity={snackbarInfo.severity}
+        />
       </RTL>
     </ThemeProvider>
   );

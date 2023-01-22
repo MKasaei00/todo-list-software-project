@@ -1,12 +1,42 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button"
 import  Grid  from "@mui/material/Grid";
 import  TextField  from "@mui/material/TextField";
 
 import { Layout } from "./Layout";
-import { height } from "@mui/system";
+import { login } from "../../api/AccountAPI";
 
-function Login(){
+function Login(props){
+    const navigate = useNavigate();
+    
+    const [username,setUsername] = useState('');
+    const [password,setPassword] = useState('');
+
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value);
+        // console.log(e.target.value);
+    }
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        // console.log(e.target.value);
+    }
+
+    const loginApiCall = () => {
+        // let data = new FormData();
+        // data.append("username", username);
+        // data.append("password", password);
+        // console.log('data.username:', data.get('username'));
+        // console.log('data.password:', data.get('password'));
+        let data = {
+            username : username,
+            password : password,
+        };
+        login(data,navigate,props.setSnackbarInfo);
+    }
+
     return(
         <>
             <Layout>
@@ -27,8 +57,7 @@ function Login(){
                         id="qualitative_info"
                         label="نام کاربری"
                         sx={{mt:10}}
-                        // value={qualitative_info}
-                        // onChange={handleQualitative_infoChange}
+                        onChange={handleUsernameChange}
                     />
                     <TextField
                         fullWidth
@@ -36,8 +65,7 @@ function Login(){
                         label="رمز عبور"
                         sx={{mt:2}}
                         type="password"
-                        // value={qualitative_info}
-                        // onChange={handleQualitative_infoChange}
+                        onChange={handlePasswordChange}
                     />
                     <Grid container justifyContent="center">
                         <Button
@@ -50,6 +78,7 @@ function Login(){
                                 width:'55%',
                                 height:50,
                             }}
+                            onClick={()=>{loginApiCall();}}
                         >ورود</Button>
                         <Typography variant="caption" fontWeight='bold' component="div" align="center" >
                          نام کاربری و رمز عبور ندارید؟
@@ -57,6 +86,7 @@ function Login(){
                         <Button
                             color='primary'
                             variant="contained"
+                            onClick={()=>{navigate('/Signup');}}
                             sx={{
                                 width:'55%',
                                 height:50
