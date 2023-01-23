@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SnackbarAlert from './components/Snackbar';
 import {Login} from './components/Account/Login.jsx';
 import {Signup} from './components/Account/Signup';
+import { ListofLists } from './components/TodoList/ListofLists';
 
 import { 
   ThemeProvider, 
@@ -52,6 +53,7 @@ const App = () => {
           <Routes>
             <Route path="/Login" element={<Login setSnackbarInfo={setSnackbarInfo}/>} />
             <Route path="/Signup" element={<Signup setSnackbarInfo={setSnackbarInfo}/>} />
+            <Route path="/List" element={<ListofLists setSnackbarInfo={setSnackbarInfo}/>} />
           </Routes>
           
         </BrowserRouter>

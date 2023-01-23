@@ -50,7 +50,7 @@ function Login(props){
                     }}
                 >   
                     <Typography variant="h5" fontWeight='bold' component="div" align="center" >
-                         ورود به تسکینو
+                         ورود به تسکدان
                     </Typography>
                     <TextField
                         fullWidth

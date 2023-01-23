@@ -29,7 +29,7 @@ const login = async (data,navigate,setSnackbarInfo) => {
         message: 'با موفقیت لاگین شدید',
         severity: 'success',
       });
-    //   navigate('/Design');
+      navigate('/List');
     }
 };
 

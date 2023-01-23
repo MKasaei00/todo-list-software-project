@@ -63,7 +63,7 @@ function Signup(props){
                     }}
                 >   
                     <Typography variant="h5" fontWeight='bold' component="div" align="center" >
-                         ثبت نام در تسکینو
+                         ثبت نام در تسکدان
                     </Typography>
                     <TextField
                         fullWidth
