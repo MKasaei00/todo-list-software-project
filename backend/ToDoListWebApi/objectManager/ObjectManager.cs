@@ -24,7 +24,7 @@ public class ObjectManager
         return models;
     }
 
-    public List<ToDoListObject> LoadObjects(Username username)
+    public List<ToDoListObject> LoadObjects(string username)
     {
         var models = LoadAllObjects();
         var result = models.Where(o => o.OwnerUsername == username).ToList();
@@ -32,7 +32,7 @@ public class ObjectManager
         return result;
     }
 
-    public List<ToDoListObject> LoadVisibleObjects(Username username)
+    public List<ToDoListObject> LoadVisibleObjects(string username)
     {
         var models = LoadAllObjects();
         var result = models.Where(o => o.ValidUsers.Contains(username)).ToList();
@@ -40,7 +40,7 @@ public class ObjectManager
         return result;
     }
 
-    public async Task Create(Username username, ToDoListObject listObject)
+    public async Task Create(string username, ToDoListObject listObject)
     {
         listObject.OwnerUsername = username;
 
@@ -50,7 +50,7 @@ public class ObjectManager
         await _databaseContext.SaveChangesAsync();
     }
     
-    public async Task Update(ToDoListObject listObject)
+    public async Task Update(string infoUsername, ToDoListObject listObject)
     {
         var newObj = _toDoListObjectAdapter.ConvertPersistent(listObject);
 
@@ -59,6 +59,13 @@ public class ObjectManager
         if (oldObj is null)
         {
             throw new InvalidOperationException("Could not find item with this id");
+        }
+
+        var oldObjModel = _toDoListObjectAdapter.ConvertModel(oldObj);
+
+        if (!oldObjModel.ValidUsers.Contains(infoUsername))
+        {
+            throw new InvalidOperationException("User has no access to this list");
         }
         
         oldObj.Content = newObj.Content;
