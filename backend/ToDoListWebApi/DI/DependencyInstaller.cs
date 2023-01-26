@@ -1,4 +1,6 @@
-﻿using ToDoListWebApi.Services.Abstractions;
+﻿using ToDoListWebApi.Adapter;
+using ToDoListWebApi.objectManager;
+using ToDoListWebApi.Services.Abstractions;
 using ToDoListWebApi.Services.Implementations;
 
 namespace ToDoListWebApi.DI;
@@ -12,6 +14,8 @@ public static class DependencyInstaller
         collection.AddTransient<IAuthService, AuthService>();
         collection.AddTransient<IAuthPersistenceService, AuthPersistenceService>();
         collection.AddTransient<IPasswordHashCreator, PasswordHashCreator>();
+        collection.AddTransient<ToDoListObjectAdapter>();
+        collection.AddTransient<ObjectManager>();
 
         return collection;
     }

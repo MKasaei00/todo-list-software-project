@@ -8,6 +8,7 @@ public class DatabaseContext : DbContext
 {
     private readonly IConfiguration _configuration;
     public virtual DbSet<PersistentUser> Users { get; set; }
+    public virtual DbSet<PersistentToDoListObject> ToDoListObjects { get; set; }
 
     protected DatabaseContext(IConfiguration configuration)
     {

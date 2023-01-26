@@ -33,7 +33,7 @@ public class AuthPersistenceService : IAuthPersistenceService
     public async Task RegisterUser(Username username, string firstName, string lastName, string password)
     {
         var hash = _passwordHashCreator.Hash(password);
-        
+
         _dbContext.Users.Add(new PersistentUser()
         {
             Username = username.ToString(),
@@ -41,7 +41,7 @@ public class AuthPersistenceService : IAuthPersistenceService
             LastName = lastName,
             HashedPassword = hash
         });
-        
+
         await _dbContext.SaveChangesAsync();
     }
 
@@ -54,5 +54,11 @@ public class AuthPersistenceService : IAuthPersistenceService
         }
 
         return user;
+    }
+
+    public async Task<List<PersistentUser>> GetAll()
+    {
+        var users = await _dbContext.Users.ToListAsync();
+        return users;
     }
 }

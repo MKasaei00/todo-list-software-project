@@ -13,6 +13,7 @@ public interface IAuthService
 
     Task Logout(IResponseCookies responseCookies);
     Task<PersistentUser> GetInfo(IRequestCookieCollection requestCookieCollection);
+    Task<List<PersistentUser>> GetAllUsers();
 
     Task Register(Username username,
         string firstName,
