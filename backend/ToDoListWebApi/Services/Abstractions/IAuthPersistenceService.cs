@@ -8,4 +8,5 @@ public interface IAuthPersistenceService
     Task<bool> ValidateUser(Username username, string password);
     Task RegisterUser(Username username, string firstName, string lastName, string password);
     Task<PersistentUser> GetUser(Username username);
+    Task<List<PersistentUser>> GetAll();
 }

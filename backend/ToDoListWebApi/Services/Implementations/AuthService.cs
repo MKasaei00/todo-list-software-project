@@ -52,6 +52,11 @@ public class AuthService : IAuthService
         return _authPersistenceService.GetUser(currentUser);
     }
 
+    public async Task<List<PersistentUser>> GetAllUsers()
+    {
+        return await _authPersistenceService.GetAll();
+    }
+
     public async Task Register(
         Username username,
         string firstName,
