@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button"
+import Button from "@mui/material/Button";
 import  Grid  from "@mui/material/Grid";
 import  TextField  from "@mui/material/TextField";
 
@@ -25,11 +25,6 @@ function Login(props){
     }
 
     const loginApiCall = () => {
-        // let data = new FormData();
-        // data.append("username", username);
-        // data.append("password", password);
-        // console.log('data.username:', data.get('username'));
-        // console.log('data.password:', data.get('password'));
         let data = {
             username : username,
             password : password,
