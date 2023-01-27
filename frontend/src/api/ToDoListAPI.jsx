@@ -49,7 +49,7 @@ const getVisible = async (setData,setSnackbarInfo) => {
 /////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////    Create API     ////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
-const create = async (data,navigate,setSnackbarInfo) => {
+const create = async (data,setSnackbarInfo) => {
     axios.post(CREATELIST_URL, data,{withCredentials: true,} )
       .then(res => {
         console.log(res);
@@ -59,7 +59,6 @@ const create = async (data,navigate,setSnackbarInfo) => {
                 message: 'با موفقیت ایجاد شد.',
                 severity: 'success',
             });
-            navigate('/List')
         }
         else{
           setSnackbarInfo({
@@ -74,8 +73,8 @@ const create = async (data,navigate,setSnackbarInfo) => {
 /////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////    Delete API     ////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
-const deleteList = async (data,navigate,setSnackbarInfo) => {
-    axios.post(DELETELIST_URL, data,{withCredentials: true,} )
+const deleteList = async (deletingListId,setSnackbarInfo) => {
+    axios.post(DELETELIST_URL, null,{params:{deletingListId},withCredentials: true,} )
       .then(res => {
         console.log(res);
         if (res.status===200){
@@ -84,7 +83,6 @@ const deleteList = async (data,navigate,setSnackbarInfo) => {
                 message: 'با موفقیت حذف شد.',
                 severity: 'success',
             });
-            navigate('/List')
         }
         else{
           setSnackbarInfo({

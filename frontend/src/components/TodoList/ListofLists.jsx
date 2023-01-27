@@ -37,14 +37,14 @@ const CreateStyle = {
   };
 
 function ListofLists(props){
-    const navigate = useNavigate();
     const [data,setData] = useState([]);
     const [data2,setData2] = useState([]);
+    const [update,setUpdate] = useState(false);
 
     useEffect(()=>{
         getOwend(setData,props.setSnackbarInfo);
         getVisible(setData2,props.setSnackbarInfo);
-      },[]);
+      },[update]);
 
     //Create Modal
     const[createModal,setCreateModal] = useState(false);
@@ -56,10 +56,9 @@ function ListofLists(props){
     };
 
     const deleteAPICall = (id) => {
-        let data = {
-            deletingListId : id, 
-        }
-        deleteList(data,navigate,props.setSnackbarInfo);
+        let deletingListId = id
+        deleteList(deletingListId,props.setSnackbarInfo);
+        setUpdate(!update);
     };
     
 
@@ -198,7 +197,7 @@ function ListofLists(props){
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={CreateStyle}>
-                    <CreateList setSnackbarInfo={props.setSnackbarInfo}></CreateList>
+                    <CreateList setSnackbarInfo={props.setSnackbarInfo} update={update} setUpdate={setUpdate} handleCloseCreateModal={handleCloseCreateModal}></CreateList>
                 </Box >
             </Modal>
         </Layout>

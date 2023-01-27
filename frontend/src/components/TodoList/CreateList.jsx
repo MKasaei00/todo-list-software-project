@@ -36,7 +36,6 @@ const MenuProps = {
   }
 
 function CreateList (props) {
-    const navigate = useNavigate();
     const theme = useTheme();
     const [title,setTitle] = useState('');
     const [validUsers,setValidUsers] = useState([]);
@@ -67,7 +66,9 @@ function CreateList (props) {
             validUsers : validUsers,
             items : [],
         };
-        create(data,navigate,props.setSnackbarInfo);
+        create(data,props.setSnackbarInfo);
+        props.setUpdate(!props.update);
+        props.handleCloseCreateModal();
     }
 
     return(

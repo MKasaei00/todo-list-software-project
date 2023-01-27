@@ -59,7 +59,7 @@ const App = () => {
         </BrowserRouter>
         <SnackbarAlert
           open={snackbarInfo.open}
-          setOpen={e => setSnackbarInfo({ message: '', severity: '', open: e })}
+          setOpen={e => setSnackbarInfo({ message: '', severity: 'info', open: e })}
           message={snackbarInfo.message}
           severity={snackbarInfo.severity}
         />
