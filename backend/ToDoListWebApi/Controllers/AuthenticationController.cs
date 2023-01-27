@@ -75,6 +75,22 @@ public class AuthenticationController : ControllerBase
         return new ActionResult<UserInfoResponse>(response);
     }
 
+    [HttpPost("GetAllUsers")]
+    public async Task<ActionResult<List<UserInfoResponse>>> GetAllUsers()
+    {
+        var users = await _authService.GetAllUsers();
+        var responses = users
+            .Select(user => new UserInfoResponse()
+            {
+                Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            })
+            .ToList();
+
+        return responses;
+    }
+
     [HttpPost("Register")]
     public async Task<ActionResult> Register(RegisterUserRequest request)
     {
