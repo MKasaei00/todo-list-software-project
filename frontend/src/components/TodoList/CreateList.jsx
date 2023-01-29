@@ -63,7 +63,7 @@ function CreateList (props) {
         let data ={
             title : title,
             ownerUsername : localStorage.getItem('username'),
-            validUsers : validUsers,
+            validUsers : [...validUsers,localStorage.getItem('username')],
             items : [],
         };
         create(data,props.setSnackbarInfo);

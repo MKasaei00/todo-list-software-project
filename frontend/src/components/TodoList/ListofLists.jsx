@@ -37,6 +37,7 @@ const CreateStyle = {
   };
 
 function ListofLists(props){
+    const navigate = useNavigate();
     const [data,setData] = useState([]);
     const [data2,setData2] = useState([]);
     const [update,setUpdate] = useState(false);
@@ -60,6 +61,11 @@ function ListofLists(props){
         deleteList(deletingListId,props.setSnackbarInfo);
         setUpdate(!update);
     };
+
+    const openList = (list) => {
+        console.log(list);
+        navigate('/List/items',{state:{list:list}})
+    };
     
 
     return(
@@ -72,7 +78,7 @@ function ListofLists(props){
                     <Grid container spacing={1} justifyContent="center">
                         {data.map((list) => (
                             <React.Fragment key={list.id}>
-                                {list.validUsers.length?<></>:
+                                {list.validUsers.length>1?<></>:
                                 <Grid item >
                                     <Card  sx={{ width: 250}}>
                                         <CardContent>
@@ -85,7 +91,7 @@ function ListofLists(props){
                                         </CardContent>
                                         <CardActions>
                                             <Tooltip title="Open">
-                                                <Fab color="success" size="small" style={{ transform: 'scale(0.7)',}} aria-label="open">
+                                                <Fab color="success" size="small" style={{ transform: 'scale(0.7)',}} aria-label="open" onClick={()=>openList(list)}>
                                                 <OpenInFullIcon  />
                                                 </Fab>
                                             </Tooltip>
@@ -123,7 +129,7 @@ function ListofLists(props){
                     <Grid container spacing={1} justifyContent="center">
                         {data.map((list) => (
                             <React.Fragment key={list.id}>
-                                {!list.validUsers.length?<></>:
+                                {(list.validUsers.length<2)?<></>:
                                 <Grid item >
                                     <Card  sx={{ width: 250}}>
                                         <CardContent>
@@ -136,7 +142,7 @@ function ListofLists(props){
                                         </CardContent>
                                         <CardActions>
                                             <Tooltip title="Open">
-                                                <Fab color="success" size="small" style={{ transform: 'scale(0.7)',}} aria-label="open">
+                                                <Fab color="success" size="small" style={{ transform: 'scale(0.7)',}} aria-label="open" onClick={()=>openList(list)}>
                                                 <OpenInFullIcon  />
                                                 </Fab>
                                             </Tooltip>
@@ -159,7 +165,7 @@ function ListofLists(props){
                         
                         {data2.map((list) => (
                             <React.Fragment key={list.id}>
-                                {!list.validUsers.length?<></>:
+                                {list.ownerUsername===localStorage.getItem('username')?<></>:
                                 <Grid item >
                                     <Card  sx={{ width: 250}}>
                                         <CardContent>
@@ -172,7 +178,7 @@ function ListofLists(props){
                                         </CardContent>
                                         <CardActions>
                                             <Tooltip title="Open">
-                                                <Fab color="success" size="small" style={{ transform: 'scale(0.7)',}} aria-label="open">
+                                                <Fab color="success" size="small" style={{ transform: 'scale(0.7)',}} aria-label="open" onClick={()=>openList(list)}>
                                                 <OpenInFullIcon  />
                                                 </Fab>
                                             </Tooltip>

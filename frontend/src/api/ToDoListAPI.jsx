@@ -3,6 +3,7 @@ import { GETLISTS_URL } from "../constants/routes";
 import { GETLISTS2_URL } from "../constants/routes";
 import { CREATELIST_URL } from "../constants/routes";
 import { DELETELIST_URL } from "../constants/routes";
+import { UPDATELIST_URL } from "../constants/routes";
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////    GetOwend API     //////////////////////////////////
@@ -94,10 +95,35 @@ const deleteList = async (deletingListId,setSnackbarInfo) => {
       })
 };
 
+/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////    Update API     ////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+const update = async (data,setSnackbarInfo) => {
+  axios.post(UPDATELIST_URL, data,{withCredentials: true,} )
+    .then(res => {
+      console.log(res);
+      if (res.status===200){
+          setSnackbarInfo({
+              open: true, 
+              message: 'با موفقیت انجام شد.',
+              severity: 'success',
+          });
+      }
+      else{
+        setSnackbarInfo({
+          open: true,
+          message: 'مشکلی پیش آمده است. دوباره تلاش کنید.',
+          severity: 'error',
+        });
+      }
+    })
+};
+
 
 export {
     getOwend,
     getVisible,
     create,
     deleteList,
+    update,
 }

@@ -15,6 +15,7 @@ import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCh
 
 const pages = [ 'میزکار','خرید اشتراک', 'درباره ما'];
 const settings = ['ورود', 'ثبت نام'];
+const settings2 = ['خروج'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -126,7 +127,10 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="" src="/static/images/avatar/2.jpg" />
+                {localStorage.getItem('username')?
+                <Avatar >{localStorage.getItem('username')[0]}</Avatar>
+                :<Avatar alt="" src="/static/images/avatar/2.jpg" />
+                }
               </IconButton>
             </Tooltip>
             <Menu
@@ -145,11 +149,18 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {localStorage.getItem('username')?settings2.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              )):
+              settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
+              
+              
             </Menu>
           </Box>
         </Toolbar>

@@ -7,6 +7,7 @@ import SnackbarAlert from './components/Snackbar';
 import {Login} from './components/Account/Login.jsx';
 import {Signup} from './components/Account/Signup';
 import { ListofLists } from './components/TodoList/ListofLists';
+import { ListPage } from './components/TodoList/List';
 
 import { 
   ThemeProvider, 
@@ -54,6 +55,7 @@ const App = () => {
             <Route path="/Login" element={<Login setSnackbarInfo={setSnackbarInfo}/>} />
             <Route path="/Signup" element={<Signup setSnackbarInfo={setSnackbarInfo}/>} />
             <Route path="/List" element={<ListofLists setSnackbarInfo={setSnackbarInfo}/>} />
+            <Route path="/List/items" element={<ListPage setSnackbarInfo={setSnackbarInfo}/>} />
           </Routes>
           
         </BrowserRouter>

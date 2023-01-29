@@ -6,3 +6,4 @@ export const GETLISTS_URL = 'http://localhost:5000/ToDoList/GetOwned';
 export const GETLISTS2_URL = 'http://localhost:5000/ToDoList/GetVisible';
 export const CREATELIST_URL = 'http://localhost:5000/ToDoList/Create';
 export const DELETELIST_URL = 'http://localhost:5000/ToDoList/Delete';
+export const UPDATELIST_URL = 'http://localhost:5000/ToDoList/Update';
